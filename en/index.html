@@ -6,86 +6,145 @@
 <title>Tabilm — Support</title>
 <style>
 :root {
-  --paper: #F4ECDD; --card: #FFFFFF; --ink: #2C3E50;
-  --sienna: #A85A3A; --sienna-dark: #8A4A30; --muted: #7A746A; --line: #E5DCC9;
+  --accent: #A85A3A; --accent-dark: #8A4A30; --accent-50: #F6EEE2; --accent-100: #EFDCC9; --accent-200: #E7C9B4;
+  --gray-50: #faf7f1; --gray-100: #f1ece2; --gray-200: #e5dccb;
+  --gray-500: #8a8377; --gray-600: #6b6459; --gray-800: #2C3E50; --gray-900: #1f2b38;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--paper); color: var(--ink); line-height: 1.8;
-  -webkit-font-smoothing: antialiased;
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  color: var(--gray-800); line-height: 1.75; -webkit-font-smoothing: antialiased; background: #fff; }
+.hero { background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+  color: #fff; padding: 76px 20px 56px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content:''; position:absolute; inset:-50%; background:
+  radial-gradient(circle at 30% 70%, rgba(255,255,255,.07) 0%, transparent 50%),
+  radial-gradient(circle at 70% 30%, rgba(255,255,255,.05) 0%, transparent 50%); pointer-events:none; }
+.hero-content { position: relative; z-index: 1; }
+.hero img { width: 92px; height: 92px; border-radius: 22px; box-shadow: 0 4px 16px rgba(0,0,0,.22); }
+.hero h1 { font-size: 2.0em; font-weight: 700; letter-spacing: -.02em; margin: 16px 0 8px; }
+.hero p { font-size: 1.05em; opacity: .92; max-width: 540px; margin: 0 auto; }
+.lang-switch { position: absolute; top: 18px; right: 18px; z-index: 10; }
+.lang-switch a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .85em;
+  padding: 6px 12px; border: 1px solid rgba(255,255,255,.35); border-radius: 6px; }
+.lang-switch a:hover { color: #fff; background: rgba(255,255,255,.12); }
+.container { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 56px 0; border-bottom: 1px solid var(--gray-100); }
+.section:last-child { border-bottom: none; }
+.section-label { display: inline-block; font-size: .72em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--accent); background: var(--accent-50); padding: 4px 12px; border-radius: 4px; margin-bottom: 12px; }
+.section h2 { font-size: 1.55em; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; letter-spacing: -.01em; }
+.section .subtitle { color: var(--gray-500); font-size: 1.02em; margin-bottom: 28px; }
+.faq-list { display: flex; flex-direction: column; gap: 14px; }
+.faq-item { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 12px; padding: 20px 22px; }
+.faq-item h3 { font-size: 1em; font-weight: 600; color: var(--gray-800); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.faq-q { flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff; font-weight: 700; font-size: .8em; display: inline-flex; align-items: center; justify-content: center; }
+.faq-item p { color: var(--gray-600); font-size: .93em; margin-left: 38px; }
+.faq-item p a { color: var(--accent); }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.contact-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 26px; transition: all .25s ease; }
+.contact-card:hover { border-color: var(--accent-200); box-shadow: 0 8px 24px rgba(44,62,80,.07); transform: translateY(-2px); }
+.contact-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--accent-50);
+  display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 14px; }
+.contact-card h3 { font-size: 1em; font-weight: 600; margin-bottom: 6px; color: var(--gray-800); }
+.contact-card p { color: var(--gray-600); font-size: .9em; line-height: 1.6; }
+.contact-card a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.contact-card a:hover { text-decoration: underline; }
+.footer { text-align: center; padding: 38px 20px; color: var(--gray-500); font-size: .85em; }
+.footer-links { display: flex; justify-content: center; gap: 22px; margin-bottom: 10px; }
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+@media (max-width: 600px) {
+  .hero { padding: 56px 20px 40px; } .hero h1 { font-size: 1.5em; }
+  .section { padding: 40px 0; } .section h2 { font-size: 1.3em; }
+  .contact-grid { grid-template-columns: 1fr; }
 }
-.hero {
-  background: linear-gradient(160deg, var(--sienna-dark) 0%, var(--sienna) 100%);
-  color: #FFF8EF; text-align: center; padding: 64px 20px 52px;
+@media (prefers-color-scheme: dark) {
+  :root { --gray-50:#1a1a26; --gray-100:#22222f; --gray-200:#30303d; --gray-500:#9b9488; --gray-600:#bdb7ab; --gray-800:#e7e2d8; --gray-900:#f3efe6; --accent-50:#2a1d14; }
+  body { background: #0f0f17; color: var(--gray-800); }
+  .faq-item { background: #16161f; } .contact-card { background: #16161f; }
 }
-.hero img { width: 88px; height: 88px; border-radius: 20px; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
-.hero h1 { font-size: 1.7em; margin-top: 14px; letter-spacing: .04em; }
-.hero p { opacity: .92; margin-top: 6px; font-size: .98em; }
-.lang { margin-top: 12px; font-size: .9em; }
-.lang a { color: #FFE9D8; }
-.wrap { max-width: 680px; margin: 0 auto; padding: 36px 20px 80px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 26px 24px; margin-bottom: 16px; }
-h2 { font-size: 1.05em; color: var(--sienna); margin-bottom: 8px; }
-p, li { font-size: .95em; }
-.contact { text-align: center; padding: 34px 24px; }
-.btn {
-  display: inline-block; background: var(--sienna); color: #fff; text-decoration: none;
-  padding: 13px 28px; border-radius: 12px; font-weight: 600; margin-top: 12px;
-}
-.note { color: var(--muted); font-size: .85em; margin-top: 10px; }
-footer { text-align: center; color: var(--muted); font-size: .85em; margin-top: 32px; }
-a { color: var(--sienna); }
 </style>
 </head>
 <body>
+
 <div class="hero">
-  <img src="../icon.png" alt="Tabilm">
-  <h1>Tabilm Support</h1>
-  <p>Shoot it. It becomes a memory.</p>
-  <p class="lang"><a href="../">日本語</a></p>
+  <div class="lang-switch"><a href="../">日本語</a></div>
+  <div class="hero-content">
+    <img src="../icon.png" alt="Tabilm">
+    <h1>Tabilm Support</h1>
+    <p>Shoot it, and it becomes a memory</p>
+  </div>
 </div>
 
-<div class="wrap">
+<div class="container">
 
-<div class="card">
-  <h2>Is exporting Vlogs free?</h2>
-  <p>Your first export is free. After that, a one-time ¥490 purchase (“Vlog Export”) unlocks unlimited exports. No subscriptions, no extra charges, no ads.</p>
+  <div class="section">
+    <span class="section-label">FAQ</span>
+    <h2>Frequently asked</h2>
+    <p class="subtitle">Start here if something's not working</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3><span class="faq-q">Q</span>Is exporting a Vlog free?</h3>
+        <p>Your first export is free. From the second one, a one-time ¥490 "Vlog Export" unlocks unlimited exports. No subscriptions, no extra charges, no ads.</p>
+      </div>
+      <div class="faq-item">
+        <h3><span class="faq-q">Q</span>Where are my videos stored?</h3>
+        <p>Entirely on your iPhone. There is no developer server, and your footage is never uploaded. Exported Vlogs are added to Photos only when you tap "Save to Camera Roll".</p>
+      </div>
+      <div class="faq-item">
+        <h3><span class="faq-q">Q</span>How do I use it with companions?</h3>
+        <p>From the trip's Album tab, tap "Invite companions" to share a link, or show the QR code to join on the spot in seconds. You can edit the itinerary and packing list together; both iPhones need to be signed in to iCloud.</p>
+      </div>
+      <div class="faq-item">
+        <h3><span class="faq-q">Q</span>Can I use it with Android friends?</h3>
+        <p>Sharing currently works between iPhones (Apple IDs) only.</p>
+      </div>
+      <div class="faq-item">
+        <h3><span class="faq-q">Q</span>I'm worried about music licensing</h3>
+        <p>The built-in BGM comes from Pixabay under the Pixabay Content License (commercial use allowed, no attribution required). You can include it in exported videos as-is. For music you import yourself, please check the rights on your own.</p>
+      </div>
+      <div class="faq-item">
+        <h3><span class="faq-q">Q</span>I want to delete everything</h3>
+        <p>Deleting a trip also removes its data from iCloud. Deleting the app erases everything on your device; anything left in iCloud can be managed from iOS Settings → Apple ID → iCloud. See the <a href="https://kizzz9.github.io/tabilm-privacy-policy/en/">Privacy Policy</a> for details.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="section-label">Contact</span>
+    <h2>Get in touch</h2>
+    <p class="subtitle">Bug reports, feature requests and questions</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">🐛</div>
+        <h3>Report a bug</h3>
+        <p>Found something off? Let us know what happened.</p>
+        <p style="margin-top:12px;"><a href="https://github.com/kizzz9/tabilm-support/issues">GitHub Issues</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">💡</div>
+        <h3>Request a feature</h3>
+        <p>"I wish it could do this" — ideas are welcome.</p>
+        <p style="margin-top:12px;"><a href="https://github.com/kizzz9/tabilm-support/issues">GitHub Issues</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">❓</div>
+        <h3>Questions</h3>
+        <p>Ask anything about how it works.</p>
+        <p style="margin-top:12px;"><a href="https://github.com/kizzz9/tabilm-support/issues">GitHub Issues</a></p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="card">
-  <h2>Where are my videos stored?</h2>
-  <p>Entirely on your iPhone. There is no developer server, and your footage is never uploaded. Exported Vlogs are added to Photos only when you tap “Save to Camera Roll”.</p>
+<div class="footer">
+  <div class="footer-links">
+    <a href="https://kizzz9.github.io/tabilm-privacy-policy/en/">Privacy Policy</a>
+    <a href="https://github.com/kizzz9/tabilm-support/issues">Contact</a>
+  </div>
+  <p>&copy; 2026 kizzz9 — Tabilm</p>
 </div>
 
-<div class="card">
-  <h2>How do I use it with travel companions?</h2>
-  <p>From the trip’s Album tab, tap “Invite companions” to send a link, or show the QR code to join on the spot in seconds. You can edit the itinerary and packing list together. Both iPhones need to be signed in to iCloud.</p>
-</div>
-
-<div class="card">
-  <h2>Can I share with Android friends?</h2>
-  <p>Sharing currently works between iPhones (Apple IDs) only.</p>
-</div>
-
-<div class="card">
-  <h2>What about music copyright?</h2>
-  <p>Built-in tracks are by Kevin MacLeod (CC BY 4.0). When you share an exported Vlog, a credit line is added to the caption automatically. For music you import yourself, please check the rights on your own.</p>
-</div>
-
-<div class="card">
-  <h2>How do I delete my data completely?</h2>
-  <p>Deleting a trip also removes its data from iCloud. Deleting the App erases everything on your device; anything left in iCloud can be managed from Settings → Apple ID → iCloud. See the <a href="https://kizzz9.github.io/tabilm-privacy-policy/en/">Privacy Policy</a> for details.</p>
-</div>
-
-<div class="card contact">
-  <h2>Still stuck?</h2>
-  <p>Bug reports, requests, questions — all welcome.</p>
-  <a class="btn" href="mailto:nsmtkz9@gmail.com?subject=Tabilm%20Support">Email us</a>
-  <p class="note">nsmtkz9@gmail.com — we usually reply within 2–3 days</p>
-</div>
-
-<footer>© 2026 kizzz9 — Tabilm</footer>
-</div>
 </body>
 </html>
