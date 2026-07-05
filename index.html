@@ -7,8 +7,7 @@
 <title>Tabilm — サポート</title>
 <link rel="icon" href="./icon.png">
 <link rel="apple-touch-icon" href="./icon.png">
-<!-- Turnstile を有効化する場合は次の行のコメントを外す:
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
 :root {
   --desk: #E9DEC9;
@@ -210,10 +209,9 @@ body {
           <textarea id="cf-message" name="message" maxlength="5000" required></textarea>
         </div>
         <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <!-- Turnstile を有効化する場合は次の div のコメントを外し data-sitekey を設定:
         <div class="field">
-          <div class="cf-turnstile" data-sitekey="__TURNSTILE_SITEKEY__" data-theme="auto" data-language="ja"></div>
-        </div> -->
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAADv-5iOVlinTmIvp" data-theme="auto" data-language="ja"></div>
+        </div>
         <button type="submit" class="submit">送信する</button>
         <p class="form-status" id="form-status" role="status"></p>
       </form>
