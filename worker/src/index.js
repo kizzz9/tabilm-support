@@ -26,8 +26,10 @@ export default {
       return json({ ok: false, error: "not_found" }, 404);
     }
 
+    // Origin 厳格化: 一致しないもの & ヘッダ無しの直接 POST を拒否
+    // (ブラウザの fetch は必ず Origin を送るので正規フォームは通る)
     const origin = request.headers.get("Origin");
-    if (origin && origin !== ALLOWED_ORIGIN) {
+    if (origin !== ALLOWED_ORIGIN) {
       return json({ ok: false, error: "forbidden" }, 403);
     }
 
